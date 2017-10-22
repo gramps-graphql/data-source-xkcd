@@ -34,7 +34,6 @@ export default class XKCDModel extends GraphQLModel {
    * @return {void}
    */
   throwError(error, customErrorData = {}) {
-    // TODO Edit these defaults to be helpful for people using your data source.
     const defaults = {
       statusCode: error.statusCode || 500,
       errorCode: `${this.constructor.name}_Error`,

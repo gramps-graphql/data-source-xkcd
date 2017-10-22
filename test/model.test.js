@@ -36,7 +36,6 @@ describe(`${DATA_SOURCE_NAME}Model`, () => {
       );
 
       try {
-        // TODO: Update to use one of your model’s methods.
         await model.getLatestComic();
       } catch (error) {
         expect(error.isBoom).toEqual(true);
@@ -60,7 +59,6 @@ describe(`${DATA_SOURCE_NAME}Model`, () => {
       );
 
       try {
-        // TODO: Update to use one of your model’s methods.
         await model.getComicById('1234');
       } catch (error) {
         expect(error.isBoom).toEqual(true);
@@ -69,7 +67,6 @@ describe(`${DATA_SOURCE_NAME}Model`, () => {
   });
 
   describe('throwError()', () => {
-    // TODO: Update this error to match the error format returned by your endpoint.
     const mockError = {
       statusCode: 401,
       options: {
@@ -89,7 +86,6 @@ describe(`${DATA_SOURCE_NAME}Model`, () => {
       );
 
       try {
-        // TODO: Update to use one of your model’s methods.
         await model.getComicById(1234);
       } catch (error) {
         // Check that GrampsError properly received the error detail.

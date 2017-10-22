@@ -56,11 +56,6 @@ describe('XKCD resolvers', () => {
   });
 
   describe('mockResolvers', () => {
-    /*
-     * So, basically mock resolvers just need to return values without
-     * exploding. To that end, we’ll just check that the mock response returns
-     * the proper fields.
-     */
     describe('XKCD_Comic', () => {
       const mockResolvers = resolvers.mockResolvers.XKCD_Comic();
 
