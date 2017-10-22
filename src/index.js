@@ -4,12 +4,11 @@ import Connector from './connector';
 import Model from './model';
 
 /*
- * For more information on the main data source object, see
- * https://ibm.biz/graphql-data-source-main
+ * For more information on the GrAMPS data sources, see
+ * https://ibm.biz/gramps-data-source-tutorial
  */
 export default {
-  // TODO: Rename the context to describe the data source.
-  context: 'YourDataSource',
+  context: 'XKCD',
   model: new Model({ connector: new Connector() }),
   schema,
   resolvers,

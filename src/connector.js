@@ -1,10 +1,9 @@
 import { GraphQLConnector } from '@gramps/gramps-express';
 
-// TODO: change `YourDataSourceConnector` to a descriptive name
-export default class YourDataSourceConnector extends GraphQLConnector {
+export default class XKCDConnector extends GraphQLConnector {
   /**
-   * TODO: describe this API endpoint
+   * xkcd exposes their API through the root URI.
    * @member {string}
    */
-  apiBaseUri = `https://example.org/v2`;
+  apiBaseUri = `https://xkcd.com`;
 }

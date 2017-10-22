@@ -1,12 +1,9 @@
 import dataSource from '../src';
 import Model from '../src/model';
 
-// TODO: Update the data source name.
-const DATA_SOURCE_NAME = 'YourDataSource';
-
-describe(`Data Source: ${DATA_SOURCE_NAME}`, () => {
+describe('Data Source: XKCD', () => {
   it('returns a context type', () => {
-    expect(dataSource.context).toBe(DATA_SOURCE_NAME);
+    expect(dataSource.context).toBe('XKCD');
   });
 
   it('returns a model', () => {

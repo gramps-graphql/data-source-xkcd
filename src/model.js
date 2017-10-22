@@ -1,23 +1,28 @@
 import { GraphQLModel, GrampsError } from '@gramps/gramps-express';
 
-/*
- * For more information on data source models, see
- * https://ibm.biz/graphql-data-source-model
- */
-
-// TODO: change `YourDataSourceModel` to a descriptive name
-export default class YourDataSourceModel extends GraphQLModel {
+export default class XKCDModel extends GraphQLModel {
   /**
-   * Loads a thing by its ID
-   * @param  {String}  id  the ID of the thing to load
-   * @return {Promise}     resolves with the loaded user data
+   * Loads the latest xkcd comic.
+   * @return {Promise}     resolves with the loaded comic data
    */
-  getById(id) {
-    return this.connector.get(`/data/${id}`).catch(res =>
+  getLatestComic() {
+    return this.connector.get(`/info.0.json`).catch(res =>
       this.throwError(res, {
-        description: 'This is an example call. Add your own!',
-        docsLink:
-          'https://gramps-graphql.github.io/gramps-express/data-source/tutorial/',
+        description: 'Could not load the latest xkcd comic',
+      }),
+    );
+  }
+
+  /**
+   * Loads an xkcd comic by its ID.
+   * @param  {String}  id  the ID of the comic to load
+   * @return {Promise}     resolves with the loaded comic data
+   */
+  getComicById(id) {
+    return this.connector.get(`/${id}/info.0.json`).catch(res =>
+      this.throwError(res, {
+        description: 'Could not load the given xkcd comic',
+        data: { id },
       }),
     );
   }
@@ -36,7 +41,7 @@ export default class YourDataSourceModel extends GraphQLModel {
       description: error.message || 'Something went wrong.',
       targetEndpoint: error.options ? error.options.uri : null,
       graphqlModel: this.constructor.name,
-      docsLink: null,
+      docsLink: 'https://ibm.biz/gramps-data-source-tutorial',
     };
 
     throw GrampsError({

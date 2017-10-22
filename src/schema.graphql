@@ -1,17 +1,49 @@
 # The query/queries to access data MUST extend the Query type.
 extend type Query {
-  # TODO: rename and add a description of this query
-  YourDataSource(
-    # TODO: Describe this argument
+  # Load info about the most recent xkcd comic.
+  getLatestComic: XKCD_Comic
+
+  # Load info about the xkcd comic with a given ID.
+  getComicById(
+    # The ID of the given comic. The ID can be found using its URL.
+    #
+    # Example: https://xkcd.com/619/ has the ID of 619.
     id: ID!
-  ): PFX_YourDataSource
+  ): XKCD_Comic
 }
 
-# TODO: Choose a unique prefix and rename the type descriptively.
-type PFX_YourDataSource {
-  # The unique ID of the thing.
-  id: ID!
-  # Describe each field to help people use the data more effectively.
-  name: String
-  lucky_numbers: [Int]
+# Details about an xkcd comic.
+type XKCD_Comic {
+  # The unique ID of the comic.
+  num: ID!
+
+  # The title of the comic.
+  title: String!
+
+  # As far as I can tell, this is always the same as the title field.
+  safe_title: String!
+
+  # Direct link to the comic image.
+  img: String!
+
+  # Alt text (this is what shows on hover in comics on the site).
+  alt: String!
+
+  # A transcript of what’s happening in the comic.
+  transcript: String
+
+  # The year the comic was released.
+  year: String
+
+  # The month the comic was released.
+  month: String
+
+  # The day the comic was released.
+  day: String
+
+  # A link to the comic on xkcd.com
+  link: String
+
+  # Additional info, shown on the xkcd website in the banner.
+  news: String
 }

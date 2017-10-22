@@ -1,12 +1,7 @@
 import resolvers from '../src/resolvers';
 import expectMockFields from './helpers/expectMockFields';
-import expectMockList from './helpers/expectMockList';
-import expectNullable from './helpers/expectNullable';
 
-// TODO: Update the data source name.
-const DATA_SOURCE_NAME = 'YourDataSource';
-
-describe(`${DATA_SOURCE_NAME} resolvers`, () => {
+describe('XKCD resolvers', () => {
   it('returns valid resolvers', () => {
     expect(Object.keys(resolvers)).toEqual([
       'queryResolvers',
@@ -16,36 +11,47 @@ describe(`${DATA_SOURCE_NAME} resolvers`, () => {
   });
 
   describe('queryResolvers', () => {
-    describe(DATA_SOURCE_NAME, () => {
-      it('loads a thing by its ID', () => {
+    const mockContext = {
+      XKCD: {
+        // Mock a response so we can actually test it.
+        getLatestComic: () => Promise.resolve('latest'),
+        // For testing, we mock the model to simply return the ID.
+        getComicById: id => Promise.resolve(id),
+      },
+    };
+
+    describe('getLatestComic()', () => {
+      it('loads the latest comic', () => {
         expect.assertions(1);
 
-        const req = {};
+        return expect(
+          resolvers.queryResolvers.getLatestComic(null, null, mockContext),
+        ).resolves.toEqual('latest');
+      });
+    });
 
-        // TODO: Update with mock arguments for your model method.
-        const args = { id: 'abc1234' };
-
-        // TODO: Update with the data source model name and method(s).
-        const mockContext = {
-          YourDataSource: {
-            // For testing, we mock the model to simply return the ID.
-            getById: id => Promise.resolve(id),
-          },
-        };
+    describe('getComicById()', () => {
+      it('loads a comic by its ID', () => {
+        expect.assertions(1);
 
         return expect(
-          // TODO: Update to use your data source.
-          resolvers.queryResolvers.YourDataSource(req, args, mockContext),
-        ).resolves.toEqual('abc1234');
+          resolvers.queryResolvers.getComicById(
+            null,
+            { id: 1234 },
+            mockContext,
+          ),
+        ).resolves.toEqual(1234);
       });
     });
   });
 
   describe('dataResolvers', () => {
-    describe('PFX_YourDataSource', () => {
-      const resolver = resolvers.dataResolvers.PFX_YourDataSource;
+    describe('XKCD_Comic', () => {
+      const resolver = resolvers.dataResolvers.XKCD_Comic;
 
-      expectNullable(resolver, ['name']);
+      it('creates a link if none is provided', () => {
+        expect(resolver.link({ num: 1234 })).toEqual('https://xkcd.com/1234/');
+      });
     });
   });
 
@@ -55,11 +61,22 @@ describe(`${DATA_SOURCE_NAME} resolvers`, () => {
      * exploding. To that end, we’ll just check that the mock response returns
      * the proper fields.
      */
-    describe('PFX_YourDataSource', () => {
-      const mockResolvers = resolvers.mockResolvers.PFX_YourDataSource();
+    describe('XKCD_Comic', () => {
+      const mockResolvers = resolvers.mockResolvers.XKCD_Comic();
 
-      expectMockFields(mockResolvers, ['id', 'name', 'lucky_numbers']);
-      expectMockList(mockResolvers, ['lucky_numbers']);
+      expectMockFields(mockResolvers, [
+        'num',
+        'alt',
+        'title',
+        'safe_title',
+        'img',
+        'transcript',
+        'year',
+        'month',
+        'day',
+        'link',
+        'news',
+      ]);
     });
   });
 });

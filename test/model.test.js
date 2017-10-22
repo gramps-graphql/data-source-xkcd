@@ -10,8 +10,7 @@ jest.mock('../src/connector', () =>
   })),
 );
 
-// TODO: Update the data source name.
-const DATA_SOURCE_NAME = 'YourDataSource';
+const DATA_SOURCE_NAME = 'XKCD';
 
 const connector = new Connector();
 const model = new Model({ connector });
@@ -21,25 +20,48 @@ describe(`${DATA_SOURCE_NAME}Model`, () => {
     expect(model).toBeInstanceOf(GraphQLModel);
   });
 
-  // TODO: Update this test to use your model’s method(s).
-  describe('getById()', () => {
-    it('calls the correct endpoint with a given ID', () => {
+  describe('getLatestComic()', () => {
+    it('calls the correct endpoint to load the latest comic', () => {
       const spy = jest.spyOn(connector, 'get');
 
-      model.getById('1234');
-      expect(spy).toHaveBeenCalledWith('/data/1234');
+      model.getLatestComic();
+      expect(spy).toHaveBeenCalledWith('/info.0.json');
     });
 
     it('throws a GrampsError if something goes wrong', async () => {
       expect.assertions(1);
 
       model.connector.get.mockImplementationOnce(() =>
-        Promise.reject({ no: 'good' }),
+        Promise.reject(Error('boom')),
       );
 
       try {
         // TODO: Update to use one of your model’s methods.
-        await model.getById('1234');
+        await model.getLatestComic();
+      } catch (error) {
+        expect(error.isBoom).toEqual(true);
+      }
+    });
+  });
+
+  describe('getComicById()', () => {
+    it('calls the correct endpoint with a given ID', () => {
+      const spy = jest.spyOn(connector, 'get');
+
+      model.getComicById('1234');
+      expect(spy).toHaveBeenCalledWith('/1234/info.0.json');
+    });
+
+    it('throws a GrampsError if something goes wrong', async () => {
+      expect.assertions(1);
+
+      model.connector.get.mockImplementationOnce(() =>
+        Promise.reject(Error('boom')),
+      );
+
+      try {
+        // TODO: Update to use one of your model’s methods.
+        await model.getComicById('1234');
       } catch (error) {
         expect(error.isBoom).toEqual(true);
       }
@@ -68,7 +90,7 @@ describe(`${DATA_SOURCE_NAME}Model`, () => {
 
       try {
         // TODO: Update to use one of your model’s methods.
-        await model.getById(1234);
+        await model.getComicById(1234);
       } catch (error) {
         // Check that GrampsError properly received the error detail.
         expect(error).toHaveProperty('isBoom', true);

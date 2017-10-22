@@ -1,41 +1,43 @@
-import { MockList } from 'graphql-tools';
 import casual from 'casual';
 
-/*
- * For more information on data source resolvers, see
- * https://ibm.biz/graphql-data-source-resolvers
- */
-
 export default {
-  // Queries (where does the data come from?)
   queryResolvers: {
-    // TODO: Update query resolver name(s) to match schema queries
-    YourDataSource: (rootValue, { id }, context) =>
+    getLatestComic: (_, __, context) =>
       new Promise((resolve, reject) => {
-        // TODO: Update to use the model and call the proper method.
-        context.YourDataSource
-          .getById(id)
+        context.XKCD
+          .getLatestComic()
+          .then(resolve)
+          .catch(reject);
+      }),
+    getComicById: (_, { id }, context) =>
+      new Promise((resolve, reject) => {
+        context.XKCD
+          .getComicById(id)
           .then(resolve)
           .catch(reject);
       }),
   },
 
-  // Data fields (which data from the response goes to which field?)
   dataResolvers: {
-    // TODO: Update to reference the schema type(s) and field(s).
-    PFX_YourDataSource: {
-      // If a field isn’t always set, but it shouldn’t break the response, make it nullable.
-      name: data => data.name || null,
+    XKCD_Comic: {
+      // The link is often empty, so build one if it’s not returned.
+      link: data => data.link || `https://xkcd.com/${data.num}/`,
     },
   },
 
-  // Mock data (How can I get real-feeling fake data while working offline?)
   mockResolvers: {
-    // TODO: Update to mock all schema fields and types.
-    PFX_YourDataSource: () => ({
-      id: casual.uuid,
-      name: casual.name,
-      lucky_numbers: () => new MockList([0, 3]),
+    XKCD_Comic: () => ({
+      num: casual.integer(0, 1999),
+      alt: casual.sentence,
+      title: casual.title,
+      safe_title: casual.title,
+      img: 'https://imgs.xkcd.com/comics/cast_iron_pans.png',
+      transcript: casual.sentences(2),
+      year: casual.year,
+      month: casual.month,
+      day: casual.integer(1, 31),
+      link: casual.url,
+      news: '',
     }),
   },
 };
