@@ -1,12 +1,12 @@
 {
-  "name": "@gramps/data-source-base",
-  "description": "Base modules for a GrAMPS GraphQL data source.",
+  "name": "@gramps/data-source-xkcd",
+  "description": "GrAMPS GraphQL data source to load xkcd comics.",
   "contributors": [
     "Jason Lengstorf <jason@lengstorf.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/gramps-graphql/data-source-base.git"
+    "url": "https://github.com/gramps-graphql/data-source-xkcd.git"
   },
   "main": "dist/index.js",
   "directories": {
