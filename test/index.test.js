@@ -2,8 +2,8 @@ import dataSource from '../src';
 import Model from '../src/model';
 
 describe('Data Source: XKCD', () => {
-  it('returns a context type', () => {
-    expect(dataSource.context).toBe('XKCD');
+  it('returns a namespace', () => {
+    expect(dataSource.namespace).toBe('XKCD');
   });
 
   it('returns a model', () => {
@@ -15,10 +15,10 @@ describe('Data Source: XKCD', () => {
   });
 
   it('returns a resolver object', () => {
-    expect(Object.keys(dataSource.resolvers)).toEqual([
-      'queryResolvers',
-      'dataResolvers',
-      'mockResolvers',
-    ]);
+    expect(dataSource.resolvers).toBeTruthy();
+  });
+
+  it('returns mock resolvers', () => {
+    expect(dataSource.mocks).toBeTruthy();
   });
 });
