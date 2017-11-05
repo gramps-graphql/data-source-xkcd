@@ -1,5 +1,5 @@
 # The query/queries to access data MUST extend the Query type.
-extend type Query {
+type Query {
   # Load info about the most recent xkcd comic.
   getLatestComic: XKCD_Comic
 
