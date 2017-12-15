@@ -7,12 +7,10 @@ describe('XKCD resolvers', () => {
 
   describe('queryResolvers', () => {
     const mockContext = {
-      XKCD: {
-        // Mock a response so we can actually test it.
-        getLatestComic: () => Promise.resolve('latest'),
-        // For testing, we mock the model to simply return the ID.
-        getComicById: id => Promise.resolve(id),
-      },
+      // Mock a response so we can actually test it.
+      getLatestComic: () => Promise.resolve('latest'),
+      // For testing, we mock the model to simply return the ID.
+      getComicById: id => Promise.resolve(id),
     };
 
     describe('getLatestComic()', () => {
