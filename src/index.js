@@ -1,4 +1,4 @@
-import schema from './schema.graphql';
+import typeDefs from './schema.graphql';
 import Connector from './connector';
 import Model from './model';
 import resolvers from './resolvers';
@@ -10,8 +10,8 @@ import mocks from './mocks';
  */
 export default {
   namespace: 'XKCD',
-  model: new Model({ connector: new Connector() }),
-  schema,
+  context: new Model({ connector: new Connector() }),
+  typeDefs,
   resolvers,
   mocks,
 };
