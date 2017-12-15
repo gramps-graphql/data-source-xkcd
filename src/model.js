@@ -28,6 +28,7 @@ export default class XKCDModel extends GraphQLModel {
 
       return this.throwError(false, {
         statusCode: res.statusCode,
+        targetEndpoint: `${this.connector.apiBaseUri}/${id}/info.0.json`,
         data: { id },
         description,
       });
@@ -40,12 +41,19 @@ export default class XKCDModel extends GraphQLModel {
    * @param  {Object?} customErrorData  additional error data to display
    * @return {void}
    */
-  throwError(error, customErrorData = {}) {
+  throwError(
+    {
+      statusCode = 500,
+      message = 'Something went wrong.',
+      targetEndpoint = null,
+    } = {},
+    customErrorData = {},
+  ) {
     const defaults = {
-      statusCode: error.statusCode || 500,
+      statusCode,
+      targetEndpoint,
       errorCode: `${this.constructor.name}_Error`,
-      description: error.message || 'Something went wrong.',
-      targetEndpoint: error.options ? error.options.uri : null,
+      description: message,
       graphqlModel: this.constructor.name,
       docsLink: 'https://ibm.biz/gramps-data-source-tutorial',
     };

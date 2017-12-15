@@ -7,6 +7,7 @@ jest.mock('../src/connector', () =>
   jest.fn(() => ({
     get: jest.fn(() => Promise.resolve()),
     put: jest.fn(() => Promise.resolve()),
+    apiBaseUri: 'https://example.org',
   })),
 );
 
@@ -69,9 +70,6 @@ describe(`${DATA_SOURCE_NAME}Model`, () => {
   describe('throwError()', () => {
     const mockError = {
       statusCode: 401,
-      options: {
-        uri: 'https://example.org/',
-      },
     };
 
     it('converts an error from the endpoint into a GrampsError', async () => {
@@ -93,7 +91,7 @@ describe(`${DATA_SOURCE_NAME}Model`, () => {
         expect(error.output).toHaveProperty('statusCode', 401);
         expect(error.output.payload).toHaveProperty(
           'targetEndpoint',
-          'https://example.org/',
+          'https://example.org/1234/info.0.json',
         );
         expect(error.output.payload).toHaveProperty(
           'graphqlModel',

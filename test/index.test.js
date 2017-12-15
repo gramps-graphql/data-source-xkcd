@@ -6,12 +6,12 @@ describe('Data Source: XKCD', () => {
     expect(dataSource.namespace).toBe('XKCD');
   });
 
-  it('returns a model', () => {
-    expect(dataSource.model).toBeInstanceOf(Model);
+  it('returns its model as a context', () => {
+    expect(dataSource.context).toBeInstanceOf(Model);
   });
 
-  it('returns a schema', () => {
-    expect(dataSource.schema).toBeTruthy();
+  it('returns typeDefs', () => {
+    expect(dataSource.typeDefs).toBeTruthy();
   });
 
   it('returns a resolver object', () => {

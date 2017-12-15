@@ -2,14 +2,14 @@ export default {
   Query: {
     getLatestComic: (_, __, context) =>
       new Promise((resolve, reject) => {
-        context
+        context.XKCD
           .getLatestComic()
           .then(resolve)
           .catch(reject);
       }),
     getComicById: (_, { id }, context) =>
       new Promise((resolve, reject) => {
-        context
+        context.XKCD
           .getComicById(id)
           .then(resolve)
           .catch(reject);
