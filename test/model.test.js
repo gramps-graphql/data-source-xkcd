@@ -1,4 +1,4 @@
-import { GraphQLModel } from '@gramps/gramps-express';
+import { GraphQLModel } from '@gramps/rest-helpers';
 import Model from '../src/model';
 import Connector from '../src/connector';
 

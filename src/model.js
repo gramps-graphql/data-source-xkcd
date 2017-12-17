@@ -1,5 +1,5 @@
 import { GrampsError } from '@gramps/errors';
-import { GraphQLModel } from '@gramps/gramps-express';
+import { GraphQLModel } from '@gramps/rest-helpers';
 
 export default class XKCDModel extends GraphQLModel {
   /**

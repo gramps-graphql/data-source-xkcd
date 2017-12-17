@@ -1,4 +1,4 @@
-import { GraphQLConnector } from '@gramps/gramps-express';
+import { GraphQLConnector } from '@gramps/rest-helpers';
 import Connector from '../src/connector';
 
 const connector = new Connector();
