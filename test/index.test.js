@@ -2,23 +2,23 @@ import dataSource from '../src';
 import Model from '../src/model';
 
 describe('Data Source: XKCD', () => {
-  it('returns a context type', () => {
-    expect(dataSource.context).toBe('XKCD');
+  it('returns a namespace', () => {
+    expect(dataSource.namespace).toBe('XKCD');
   });
 
-  it('returns a model', () => {
-    expect(dataSource.model).toBeInstanceOf(Model);
+  it('returns its model as a context', () => {
+    expect(dataSource.context).toBeInstanceOf(Model);
   });
 
-  it('returns a schema', () => {
-    expect(dataSource.schema).toBeTruthy();
+  it('returns typeDefs', () => {
+    expect(dataSource.typeDefs).toBeTruthy();
   });
 
   it('returns a resolver object', () => {
-    expect(Object.keys(dataSource.resolvers)).toEqual([
-      'queryResolvers',
-      'dataResolvers',
-      'mockResolvers',
-    ]);
+    expect(dataSource.resolvers).toBeTruthy();
+  });
+
+  it('returns mock resolvers', () => {
+    expect(dataSource.mocks).toBeTruthy();
   });
 });

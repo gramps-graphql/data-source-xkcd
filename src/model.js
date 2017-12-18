@@ -1,4 +1,5 @@
-import { GraphQLModel, GrampsError } from '@gramps/gramps-express';
+import { GrampsError } from '@gramps/errors';
+import { GraphQLModel } from '@gramps/rest-helpers';
 
 export default class XKCDModel extends GraphQLModel {
   /**
@@ -7,7 +8,7 @@ export default class XKCDModel extends GraphQLModel {
    */
   getLatestComic() {
     return this.connector.get(`/info.0.json`).catch(res =>
-      this.throwError(res, {
+      this.throwError(res.error, {
         description: 'Could not load the latest xkcd comic',
       }),
     );
@@ -19,12 +20,19 @@ export default class XKCDModel extends GraphQLModel {
    * @return {Promise}     resolves with the loaded comic data
    */
   getComicById(id) {
-    return this.connector.get(`/${id}/info.0.json`).catch(res =>
-      this.throwError(res, {
-        description: 'Could not load the given xkcd comic',
+    return this.connector.get(`/${id}/info.0.json`).catch(res => {
+      const description =
+        res.statusCode >= 400 && res.statusCode < 500
+          ? 'Comic not found'
+          : 'Could not load the given xkcd comic';
+
+      return this.throwError(false, {
+        statusCode: res.statusCode,
+        targetEndpoint: `${this.connector.apiBaseUri}/${id}/info.0.json`,
         data: { id },
-      }),
-    );
+        description,
+      });
+    });
   }
 
   /**
@@ -33,12 +41,19 @@ export default class XKCDModel extends GraphQLModel {
    * @param  {Object?} customErrorData  additional error data to display
    * @return {void}
    */
-  throwError(error, customErrorData = {}) {
+  throwError(
+    {
+      statusCode = 500,
+      message = 'Something went wrong.',
+      targetEndpoint = null,
+    } = {},
+    customErrorData = {},
+  ) {
     const defaults = {
-      statusCode: error.statusCode || 500,
+      statusCode,
+      targetEndpoint,
       errorCode: `${this.constructor.name}_Error`,
-      description: error.message || 'Something went wrong.',
-      targetEndpoint: error.options ? error.options.uri : null,
+      description: message,
       graphqlModel: this.constructor.name,
       docsLink: 'https://ibm.biz/gramps-data-source-tutorial',
     };
