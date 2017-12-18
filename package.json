@@ -20,7 +20,7 @@
     "prepublish": "npm run build",
     "prebuild": "del-cli ./dist",
     "build": "babel src -d dist",
-    "dev": "gramps --data-source-dir ./",
+    "dev": "gramps dev -d ./",
     "mock-data": "npm run dev -- --mock",
     "live-data": "npm run dev -- --live",
     "lint": "eslint src/",
@@ -42,7 +42,7 @@
     "graphql-tools": "^1.2.1 || ^2.5.1"
   },
   "devDependencies": {
-    "@gramps/cli": "^1.0.0-beta.2",
+    "@gramps/cli": "^1.0.0-beta.4",
     "@gramps/gramps": "^1.0.0-beta-7",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^8.0.1",
