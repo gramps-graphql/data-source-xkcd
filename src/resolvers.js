@@ -1,19 +1,7 @@
 export default {
   Query: {
-    getLatestComic: (_, __, context) =>
-      new Promise((resolve, reject) => {
-        context
-          .getLatestComic()
-          .then(resolve)
-          .catch(reject);
-      }),
-    getComicById: (_, { id }, context) =>
-      new Promise((resolve, reject) => {
-        context
-          .getComicById(id)
-          .then(resolve)
-          .catch(reject);
-      }),
+    getLatestComic: (_, __, context) => context.getLatestComic(),
+    getComicById: (_, { id }, context) => context.getComicById(id),
   },
   XKCD_Comic: {
     // The link is often empty, so build one if it’s not returned.
