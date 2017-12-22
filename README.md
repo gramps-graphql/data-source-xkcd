@@ -66,7 +66,7 @@ Start the app with the following command:
 
 ```sh
 # Develop with mock data
-yarn mock-data
+yarn dev:mock-data
 ```
 
 Open the URL displayed in your console to see GraphiQL.
@@ -77,11 +77,11 @@ Once you’ve got your data source configured to load live data, you can enable 
 
 ```sh
 # Develop with live data
-yarn live-data
+yarn dev
 ```
 
 Open the URL displayed in your console to see GraphiQL.
 
 ### Notes for Developers
 
-Currently, there is no watch capability (PRs welcome!), so the service needs to be stopped (`control` + `C`) and restarted (`yarn [mock-data|live-data]`) to reflect new changes to the data source.
+Currently, there is no watch capability (PRs welcome!), so the service needs to be stopped (`control` + `C`) and restarted (`yarn [dev:mock-data|dev]`) to reflect new changes to the data source.
