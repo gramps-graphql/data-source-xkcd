@@ -10,7 +10,7 @@ import mocks from './mocks';
  */
 export default {
   namespace: 'XKCD',
-  context: new Model({ connector: new Connector() }),
+  context: { model: new Model({ connector: new Connector() }) },
   typeDefs,
   resolvers,
   mocks,
