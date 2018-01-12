@@ -20,6 +20,7 @@
     "prepare": "npm run build",
     "prebuild": "del-cli ./dist",
     "build": "babel src -d dist",
+    "postbuild": "cpy ./src/schema.graphql ./dist",
     "dev": "gramps dev -d ./",
     "mock-data": "npm run dev -- --mock",
     "live-data": "npm run dev -- --live",
@@ -52,6 +53,7 @@
     "babel-eslint": "^8.2.1",
     "babel-jest": "^22.0.6",
     "babel-plugin-inline-import": "^2.0.6",
+    "cpy-cli": "^1.0.1",
     "del-cli": "^1.1.0",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -83,5 +85,5 @@
       }
     }
   },
-  "version": "1.0.3-beta"
+  "version": "1.0.3-beta1"
 }
