@@ -7,7 +7,7 @@ describe('Data Source: XKCD', () => {
   });
 
   it('returns its model as a context', () => {
-    expect(dataSource.context).toBeInstanceOf(Model);
+    expect(dataSource.context).toBeTruthy();
   });
 
   it('returns typeDefs', () => {
