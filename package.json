@@ -50,7 +50,7 @@
     "@gramps/cli": "^1.1.4",
     "@gramps/gramps": "^1.2.0",
     "babel-core": "^7.0.0-0",
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "^22.0.6",
     "babel-plugin-inline-import": "^2.0.6",
     "cpy-cli": "^1.0.1",
