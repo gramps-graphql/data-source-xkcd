@@ -64,7 +64,7 @@
     "graphql-tools": "^2.18.0",
     "husky": "^0.14.3",
     "jest": "^22.0.6",
-    "nodemon": "^1.14.11",
+    "nodemon": "^1.18.10",
     "prettier": "^1.10.2",
     "semantic-release": "^12.4.1"
   },
