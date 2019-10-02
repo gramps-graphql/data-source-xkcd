@@ -34,7 +34,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@gramps/errors": "^1.0.0",
+    "@gramps/errors": "^2.0.1",
     "@gramps/rest-helpers": "^1.0.0",
     "casual": "^1.5.14"
   },
