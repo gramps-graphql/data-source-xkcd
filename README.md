@@ -5,7 +5,7 @@
 
 Load the latest [xkcd](https://xkcd.com) comic, or look one up by its ID.
 
-This is a [GrAMPS](https://ibm.biz/gramps-graphql) data source for GraphQL.
+This is a [GrAMPS](https://github.com/gramps-graphql/gramps) data source for GraphQL.
 
 ## Example Queries
 
